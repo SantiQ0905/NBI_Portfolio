@@ -461,8 +461,8 @@ main {
 
 .hero-visual {
   position: relative;
-  width: clamp(40rem, 60vw, 55rem);
-  height: clamp(40rem, 60vw, 55rem);
+  width: clamp(32rem, 48vw, 44rem);
+  height: clamp(32rem, 48vw, 44rem);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1034,8 +1034,8 @@ main {
 
   .hero-visual {
     order: -1;
-    width: clamp(28rem, 50vw, 35rem);
-    height: clamp(28rem, 50vw, 35rem);
+    width: clamp(22.4rem, 40vw, 28rem);
+    height: clamp(22.4rem, 40vw, 28rem);
   }
 
   .section-body {
@@ -1113,8 +1113,8 @@ main {
   }
 
   .hero-visual {
-    width: clamp(24rem, 70vw, 30rem);
-    height: clamp(24rem, 70vw, 30rem);
+    width: clamp(19.2rem, 56vw, 24rem);
+    height: clamp(19.2rem, 56vw, 24rem);
   }
 
   .hero h1 {
@@ -1186,8 +1186,8 @@ main {
   }
 
   .hero-visual {
-    width: clamp(20rem, 80vw, 26rem);
-    height: clamp(20rem, 80vw, 26rem);
+    width: clamp(16rem, 64vw, 20.8rem);
+    height: clamp(16rem, 64vw, 20.8rem);
   }
 
   .hero h1 {
@@ -1233,8 +1233,8 @@ main {
 /* Additional mobile fixes for very small screens */
 @media (max-width: 360px) {
   .hero-visual {
-    width: clamp(18rem, 90vw, 22rem);
-    height: clamp(18rem, 90vw, 22rem);
+    width: clamp(14.4rem, 72vw, 17.6rem);
+    height: clamp(14.4rem, 72vw, 17.6rem);
   }
 
   .hero h1 {
