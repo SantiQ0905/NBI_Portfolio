@@ -798,9 +798,27 @@ function App() {
             </div>
           </div>
           <div className="hero-visual" aria-hidden>
-            <div className="hero-planet" />
-            <div className="hero-trail" />
             <div className="hero-glow" />
+            <div className="hero-trail" />
+            <svg className="hero-asclepius" viewBox="0 0 200 200" role="presentation">
+              <defs>
+                <linearGradient id="staffGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stopColor="var(--color-accent-strong)" />
+                  <stop offset="100%" stopColor="var(--color-accent-soft)" />
+                </linearGradient>
+                <linearGradient id="snakeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="var(--color-accent)" />
+                  <stop offset="100%" stopColor="var(--color-accent-strong)" />
+                </linearGradient>
+              </defs>
+              <path className="hero-staff" d="M100 30 L100 170" stroke="url(#staffGradient)" />
+              <path
+                className="hero-snake"
+                d="M122 65 C122 45 78 45 78 65 C78 85 122 85 122 105 C122 125 78 125 78 145 C78 165 122 165 122 185"
+                stroke="url(#snakeGradient)"
+              />
+              <circle className="hero-spark" cx="100" cy="30" r="10" />
+            </svg>
           </div>
         </section>
 
