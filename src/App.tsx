@@ -798,19 +798,21 @@ function App() {
             </div>
           </div>
           <div className="hero-visual" aria-hidden>
-            <div className="hero-image-glow" />
-            <div className="hero-sparkle sparkle-1" />
-            <div className="hero-sparkle sparkle-2" />
-            <div className="hero-sparkle sparkle-3" />
-            <div className="hero-sparkle sparkle-4" />
-            <div className="hero-sparkle sparkle-5" />
-            <div className="hero-sparkle sparkle-6" />
-            <img 
-              src="/Media/Images/rod of Asclepius.png" 
-              alt="Rod of Asclepius - Symbol of Medicine"
-              className="hero-image"
-            />
-            <div className="hero-aura" />
+            <div className="portrait-frame">
+              <div className="frame-glow" />
+              <div className="frame-border">
+                <img 
+                  src="/Media/Images/NathCoverImage.jpg" 
+                  alt="Nath - Medical Student Portrait"
+                  className="portrait-image"
+                />
+                <div className="frame-overlay" />
+              </div>
+              <div className="frame-sparkle sparkle-1" />
+              <div className="frame-sparkle sparkle-2" />
+              <div className="frame-sparkle sparkle-3" />
+              <div className="frame-sparkle sparkle-4" />
+            </div>
           </div>
         </section>
 
