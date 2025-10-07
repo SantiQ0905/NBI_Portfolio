@@ -1,422 +1,96 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect } from 'react'
 import './App.css'
 
-type LanguageKey = 'en' | 'es' | 'de'
-type ThemeMode = 'light' | 'dark'
-
-type NavigationItem = {
-  id: string
-  label: string
-}
-
-type Statistic = {
-  value: string
-  label: string
-}
-
-type Highlight = {
-  title: string
-  text: string
-}
-
-type TimelineItem = {
-  title: string
-  period: string
-  description: string
-}
-
-type ShowcaseItem = {
-  title: string
-  description: string
-  badge: string
-}
-
-type LocaleContent = {
-  brand: string
-  navigation: NavigationItem[]
-  hero: {
-    eyebrow: string
-    title: string
-    description: string
-    primaryAction: string
-    secondaryAction: string
-    stats: Statistic[]
-  }
-  about: {
-    eyebrow: string
-    title: string
-    paragraphs: string[]
-    highlights: Highlight[]
-    signature: string
-  }
-  journey: {
-    eyebrow: string
-    title: string
-    items: TimelineItem[]
-  }
-  showcase: {
-    eyebrow: string
-    title: string
-    description: string
-    items: ShowcaseItem[]
-  }
-  contact: {
-    eyebrow: string
-    title: string
-    description: string
-    primaryAction: string
-    secondaryAction: string
-  }
-  footer: string
-}
-
-const localeContent: Record<LanguageKey, LocaleContent> = {
-  en: {
-    brand: 'Lorem Ipsum',
-    navigation: [
-      { id: 'hero', label: 'Lorem' },
-      { id: 'about', label: 'Ipsum' },
-      { id: 'journey', label: 'Dolor' },
-      { id: 'showcase', label: 'Sit' },
-      { id: 'contact', label: 'Amet' },
-    ],
-    hero: {
-      eyebrow: 'Lorem ipsum dolor sit amet',
-      title: 'Consectetur adipiscing elit vestibulum',
-      description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur viverra lorem at nulla facilisis, et dictum ipsum gravida. Vestibulum sed lorem posuere, posuere justo sed, pharetra ipsum.',
-      primaryAction: 'Lorem ipsum',
-      secondaryAction: 'Dolor sit',
-      stats: [
-        { value: '12+', label: 'Lorem ipsum habitant' },
-        { value: '24K', label: 'Dolor sit amet luctus' },
-        { value: '∞', label: 'Consectetur adipiscing' },
-      ],
-    },
-    about: {
-      eyebrow: 'Sed cursus',
-      title: 'Phasellus lorem sapien vehicula',
-      paragraphs: [
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam sed lorem ac felis volutpat cursus. Suspendisse potenti viverra urna vitae mattis dignissim.',
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla facilisi. Nunc suscipit ipsum vel sem vulputate hendrerit. Duis vitae lorem sed velit sagittis molestie.',
-      ],
-      highlights: [
-        {
-          title: 'Lorem class aptent',
-          text: 'Lorem ipsum dolor sit amet consectetur adipiscing elit duis.',
-        },
-        {
-          title: 'Dolor integer',
-          text: 'Lorem ipsum dolor sit amet curabitur imperdiet lacus nec.',
-        },
-        {
-          title: 'Sit amet posuere',
-          text: 'Lorem ipsum dolor sit amet sed dictum sapien non maximus.',
-        },
-      ],
-      signature: 'Lorem Ipsum Dolor',
-    },
-    journey: {
-      eyebrow: 'Erat egestas',
-      title: 'Maecenas lorem cursus etiam',
-      items: [
-        {
-          title: 'Lorem ipsum lacinia',
-          period: '2020 — 2021',
-          description:
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam porta lorem id augue condimentum, vel lobortis arcu ornare.',
-        },
-        {
-          title: 'Dolor sit vestibulum',
-          period: '2021 — 2022',
-          description:
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. In eu lorem risus. Praesent pulvinar lorem sed orci dapibus pretium.',
-        },
-        {
-          title: 'Amet faucibus pharetra',
-          period: '2022 — Present',
-          description:
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse cursus lorem ac urna faucibus tristique in at urna.',
-        },
-      ],
-    },
-    showcase: {
-      eyebrow: 'Ligula aptent',
-      title: 'Aliquam lorem dictum viverra',
-      description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce nec lorem et ipsum blandit cursus. Pellentesque lorem ipsum, faucibus sed sapien quis, dapibus congue lorem.',
-      items: [
-        {
-          title: 'Lorem sapien interdum',
-          description: 'Lorem ipsum dolor sit amet consectetur adipiscing elit sed.',
-          badge: 'Lorem',
-        },
-        {
-          title: 'Dolor arcu placerat',
-          description: 'Lorem ipsum dolor sit amet tristique habitasse platea dictumst.',
-          badge: 'Ipsum',
-        },
-        {
-          title: 'Sit amet congue',
-          description: 'Lorem ipsum dolor sit amet donec ultricies vehicula blandit.',
-          badge: 'Dolor',
-        },
-      ],
-    },
-    contact: {
-      eyebrow: 'Pulvinar lorem',
-      title: 'Vivamus lorem sodales dictum',
-      description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer dignissim lorem a dolor posuere, ac finibus ipsum ultrices.',
-      primaryAction: 'Lorem message',
-      secondaryAction: 'Ipsum details',
-    },
-    footer: 'Lorem ipsum dolor sit amet consectetur adipiscing elit.',
-  },
-  es: {
-    brand: 'Lorem Ipsum',
-    navigation: [
-      { id: 'hero', label: 'Lórem' },
-      { id: 'about', label: 'Ípsum' },
-      { id: 'journey', label: 'Dólor' },
-      { id: 'showcase', label: 'Sít' },
-      { id: 'contact', label: 'Ámet' },
-    ],
-    hero: {
-      eyebrow: 'Lorem ipsum dolor sit amet',
-      title: 'Consectetur adipiscing elit curabitur',
-      description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin lorem ipsum, egestas in lorem vel, ornare fermentum ipsum. Aenean laoreet lorem ac lorem faucibus tristique.',
-      primaryAction: 'Lorem mensaje',
-      secondaryAction: 'Dolor visita',
-      stats: [
-        { value: '12+', label: 'Lorem ipsum habitant' },
-        { value: '24K', label: 'Dolor sit amet luctus' },
-        { value: '∞', label: 'Consectetur adipiscing' },
-      ],
-    },
-    about: {
-      eyebrow: 'Sed cursus',
-      title: 'Phasellus lorem sapien feugiat',
-      paragraphs: [
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam lorem ipsum, cursus at lorem sed, maximus gravida lorem. Aliquam erat volutpat curabitur lorem ipsum.',
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi quis lorem id lorem elementum bibendum. Cras lorem velit, feugiat at lorem ut, feugiat vulputate lorem.',
-      ],
-      highlights: [
-        {
-          title: 'Lorem class aptent',
-          text: 'Lorem ipsum dolor sit amet consectetur adipiscing elit duis.',
-        },
-        {
-          title: 'Dolor integer',
-          text: 'Lorem ipsum dolor sit amet curabitur imperdiet lacus nec.',
-        },
-        {
-          title: 'Sit amet posuere',
-          text: 'Lorem ipsum dolor sit amet sed dictum sapien non maximus.',
-        },
-      ],
-      signature: 'Lorem Ipsum Dolor',
-    },
-    journey: {
-      eyebrow: 'Erat egestas',
-      title: 'Maecenas lorem cursus etiam',
-      items: [
-        {
-          title: 'Lorem ipsum lacinia',
-          period: '2020 — 2021',
-          description:
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum lorem sem, hendrerit vitae lorem sit amet, dignissim elementum lorem.',
-        },
-        {
-          title: 'Dolor sit vestibulum',
-          period: '2021 — 2022',
-          description:
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam lorem sapien, ornare vel lorem vitae, pharetra luctus lorem.',
-        },
-        {
-          title: 'Amet faucibus pharetra',
-          period: '2022 — Presente',
-          description:
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer sed lorem sed lorem aliquam volutpat quis quis lorem.',
-        },
-      ],
-    },
-    showcase: {
-      eyebrow: 'Ligula aptent',
-      title: 'Aliquam lorem dictum viverra',
-      description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce nec lorem et ipsum blandit cursus. Pellentesque lorem ipsum, faucibus sed sapien quis, dapibus congue lorem.',
-      items: [
-        {
-          title: 'Lorem sapien interdum',
-          description: 'Lorem ipsum dolor sit amet consectetur adipiscing elit sed.',
-          badge: 'Lorem',
-        },
-        {
-          title: 'Dolor arcu placerat',
-          description: 'Lorem ipsum dolor sit amet tristique habitasse platea dictumst.',
-          badge: 'Ípsum',
-        },
-        {
-          title: 'Sit amet congue',
-          description: 'Lorem ipsum dolor sit amet donec ultricies vehicula blandit.',
-          badge: 'Dólor',
-        },
-      ],
-    },
-    contact: {
-      eyebrow: 'Pulvinar lorem',
-      title: 'Vivamus lorem sodales dictum',
-      description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer dignissim lorem a dolor posuere, ac finibus ipsum ultrices.',
-      primaryAction: 'Lorem mensaje',
-      secondaryAction: 'Ípsum detalles',
-    },
-    footer: 'Lorem ipsum dolor sit amet consectetur adipiscing elit.',
-  },
-  de: {
-    brand: 'Lorem Ipsum',
-    navigation: [
-      { id: 'hero', label: 'Lörem' },
-      { id: 'about', label: 'Ípsum' },
-      { id: 'journey', label: 'Dôlor' },
-      { id: 'showcase', label: 'Sît' },
-      { id: 'contact', label: 'Ämet' },
-    ],
-    hero: {
-      eyebrow: 'Lorem ipsum dolor sit amet',
-      title: 'Consectetur adipiscing elit egestas',
-      description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis lorem ipsum, hendrerit in lorem non, aliquet ullamcorper lorem. Mauris lorem nunc, bibendum eu lorem sed, aliquet vulputate lorem.',
-      primaryAction: 'Lorem impulsum',
-      secondaryAction: 'Dolor notam',
-      stats: [
-        { value: '12+', label: 'Lorem ipsum habitant' },
-        { value: '24K', label: 'Dolor sit amet luctus' },
-        { value: '∞', label: 'Consectetur adipiscing' },
-      ],
-    },
-    about: {
-      eyebrow: 'Sed cursus',
-      title: 'Phasellus lorem sapien aliquet',
-      paragraphs: [
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque lorem urna, vestibulum in lorem at, tempus pharetra lorem. Vivamus lorem nulla, porta eu lorem vitae, egestas condimentum lorem.',
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras lorem ipsum, tincidunt sit amet lorem non, lacinia semper lorem. Donec vitae lorem lacus, sed posuere lorem.',
-      ],
-      highlights: [
-        {
-          title: 'Lorem class aptent',
-          text: 'Lorem ipsum dolor sit amet consectetur adipiscing elit duis.',
-        },
-        {
-          title: 'Dolor integer',
-          text: 'Lorem ipsum dolor sit amet curabitur imperdiet lacus nec.',
-        },
-        {
-          title: 'Sit amet posuere',
-          text: 'Lorem ipsum dolor sit amet sed dictum sapien non maximus.',
-        },
-      ],
-      signature: 'Lorem Ipsum Dolor',
-    },
-    journey: {
-      eyebrow: 'Erat egestas',
-      title: 'Maecenas lorem cursus etiam',
-      items: [
-        {
-          title: 'Lorem ipsum lacinia',
-          period: '2020 — 2021',
-          description:
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam dignissim lorem sed lorem cursus, sed fringilla lorem tincidunt.',
-        },
-        {
-          title: 'Dolor sit vestibulum',
-          period: '2021 — 2022',
-          description:
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer id lorem non lorem molestie lobortis sed eu lorem.',
-        },
-        {
-          title: 'Amet faucibus pharetra',
-          period: '2022 — Gegenwart',
-          description:
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tincidunt lorem a lorem aliquam porta quis vel lorem.',
-        },
-      ],
-    },
-    showcase: {
-      eyebrow: 'Ligula aptent',
-      title: 'Aliquam lorem dictum viverra',
-      description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce nec lorem et ipsum blandit cursus. Pellentesque lorem ipsum, faucibus sed sapien quis, dapibus congue lorem.',
-      items: [
-        {
-          title: 'Lorem sapien interdum',
-          description: 'Lorem ipsum dolor sit amet consectetur adipiscing elit sed.',
-          badge: 'Lörem',
-        },
-        {
-          title: 'Dolor arcu placerat',
-          description: 'Lorem ipsum dolor sit amet tristique habitasse platea dictumst.',
-          badge: 'Ípsum',
-        },
-        {
-          title: 'Sit amet congue',
-          description: 'Lorem ipsum dolor sit amet donec ultricies vehicula blandit.',
-          badge: 'Dôlor',
-        },
-      ],
-    },
-    contact: {
-      eyebrow: 'Pulvinar lorem',
-      title: 'Vivamus lorem sodales dictum',
-      description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer dignissim lorem a dolor posuere, ac finibus ipsum ultrices.',
-      primaryAction: 'Lorem nachricht',
-      secondaryAction: 'Ípsum notizen',
-    },
-    footer: 'Lorem ipsum dolor sit amet consectetur adipiscing elit.',
-  },
-}
-
-const languages: { code: LanguageKey; label: string }[] = [
-  { code: 'en', label: 'EN' },
-  { code: 'es', label: 'ES' },
-  { code: 'de', label: 'DE' },
+const navigation = [
+  { id: 'perfil', label: 'Perfil' },
+  { id: 'experiencia', label: 'Experiencia' },
+  { id: 'investigacion', label: 'Investigación' },
+  { id: 'contacto', label: 'Contacto' },
 ]
 
-const getInitialTheme = (): ThemeMode => {
-  if (typeof window === 'undefined') return 'light'
-  const stored = window.localStorage.getItem('theme-mode')
-  if (stored === 'light' || stored === 'dark') {
-    return stored
-  }
-  const prefersDark =
-    typeof window.matchMedia === 'function' && window.matchMedia('(prefers-color-scheme: dark)').matches
-  return prefersDark ? 'dark' : 'light'
-}
+const availability = [
+  'Tardes entre semana (presencial o híbrido)',
+  'Sábados por la mañana',
+  'Estancias cortas o proyectos por objetivos',
+]
 
-const getInitialLanguage = (): LanguageKey => {
-  if (typeof window === 'undefined') return 'en'
-  const stored = window.localStorage.getItem('portfolio-language') as LanguageKey | null
-  return stored && ['en', 'es', 'de'].includes(stored) ? stored : 'en'
-}
+const experience = [
+  {
+    role: 'Voluntariado clínico',
+    place: 'Clínica Comunitaria Luz Azul',
+    dates: '2024 — Presente',
+    bullets: [
+      'Registro de signos vitales y triage básico con EMR.',
+      'Consejería breve sobre adherencia terapéutica.',
+      'Apoyo en campañas de vacunación y detección oportuna.',
+    ],
+  },
+  {
+    role: 'Educación para la salud',
+    place: 'Programa Escolar Vida Sana',
+    dates: '2023 — 2024',
+    bullets: [
+      'Talleres de hábitos saludables para adolescentes.',
+      'Diseño de infografías y materiales didácticos.',
+      'Coordinación con docentes y personal de salud local.',
+    ],
+  },
+  {
+    role: 'Asistente de investigación',
+    place: 'Instituto Universitario de Ciencias Médicas',
+    dates: '2023 — 2025',
+    bullets: [
+      'Revisión bibliográfica y construcción de bases de datos.',
+      'Apoyo en protocolos y consentimientos informados.',
+      'Presentación de póster en congreso estudiantil.',
+    ],
+  },
+]
+
+const timeline = [
+  {
+    period: '2023 — Inicio de carrera',
+    description: 'Primeros semestres, fundamentos clínicos, servicio comunitario.',
+  },
+  {
+    period: '2024 — Primer proyecto de investigación',
+    description: 'Revisión narrativa y presentación de póster.',
+  },
+  {
+    period: '2025 — Contacto clínico ampliado',
+    description: 'Rotaciones, educación para pacientes y trabajo interdisciplinario.',
+  },
+]
+
+const research = [
+  {
+    badge: 'Póster',
+    title: 'Adherencia al tratamiento en diabetes tipo 2: revisión narrativa',
+    venue: 'Congreso Estudiantil de Salud, 2024',
+    link: '#',
+  },
+  {
+    badge: 'Revisión',
+    title: 'Estrategias de educación para pacientes con hipertensión arterial',
+    venue: 'En preparación | 2025',
+    link: '#',
+  },
+  {
+    badge: 'Caso clínico',
+    title: 'Abordaje integral de paciente geriátrico con fragilidad',
+    venue: 'Portafolio docente, 2025',
+    link: '#',
+  },
+]
 
 function App() {
-  const [theme, setTheme] = useState<ThemeMode>(getInitialTheme)
-  const [language, setLanguage] = useState<LanguageKey>(getInitialLanguage)
-
   useEffect(() => {
     if (typeof window === 'undefined') return
-    document.body.classList.remove('theme-light', 'theme-dark')
-    document.body.classList.add(`theme-${theme}`)
-    window.localStorage.setItem('theme-mode', theme)
-  }, [theme])
-
-  useEffect(() => {
-    if (typeof window === 'undefined') return
-    window.localStorage.setItem('portfolio-language', language)
-  }, [language])
+    document.body.classList.add('theme-light')
+    return () => {
+      document.body.classList.remove('theme-light')
+    }
+  }, [])
 
   useEffect(() => {
     if (typeof window === 'undefined' || !('IntersectionObserver' in window)) return
@@ -438,80 +112,64 @@ function App() {
       elements.forEach((element) => observer.unobserve(element))
       observer.disconnect()
     }
-  }, [language])
-
-  const content = useMemo(() => localeContent[language], [language])
+  }, [])
 
   return (
     <div className="app-shell">
       <div className="orb orb-one" aria-hidden />
       <div className="orb orb-two" aria-hidden />
       <header className="site-header">
-        <div className="brand" aria-label={content.brand}>
+        <div className="brand" aria-label="Nath — Medicina">
           <span className="brand-mark" />
-          <span className="brand-name">{content.brand}</span>
+          <span className="brand-name">Nath — Medicina</span>
         </div>
-        <nav className="site-nav" aria-label="Primary">
-          {content.navigation.map((item) => (
+        <nav className="site-nav" aria-label="Principal">
+          {navigation.map((item) => (
             <a key={item.id} href={`#${item.id}`} className="nav-link">
               {item.label}
             </a>
           ))}
         </nav>
         <div className="header-controls">
-          <div className="language-switcher" role="group" aria-label="Language selector">
-            {languages.map((lang) => (
-              <button
-                key={lang.code}
-                type="button"
-                className={`chip ${language === lang.code ? 'chip-active' : ''}`}
-                onClick={() => setLanguage(lang.code)}
-              >
-                {lang.label}
-              </button>
-            ))}
-          </div>
-          <button
-            type="button"
-            className="icon-button"
-            aria-label={theme === 'light' ? 'Activate dark mode' : 'Activate light mode'}
-            onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
-          >
-            {theme === 'light' ? (
-              <svg viewBox="0 0 24 24" aria-hidden className="icon">
-                <path d="M12 4a1 1 0 0 1 1 1v1.05a1 1 0 0 1-2 0V5a1 1 0 0 1 1-1Zm6.36 2.64a1 1 0 0 1 0 1.41l-.74.74a1 1 0 1 1-1.41-1.41l.74-.74a1 1 0 0 1 1.41 0ZM19 11a1 1 0 0 1 1 1 6 6 0 0 1-6 6 1 1 0 0 1 0-2 4 4 0 0 0 4-4 1 1 0 0 1 1-1Zm-7 7a1 1 0 0 1 1 1v1.05a1 1 0 0 1-2 0V19a1 1 0 0 1 1-1Zm-7-7a1 1 0 0 1 1-1h1.05a1 1 0 1 1 0 2H6a1 1 0 0 1-1-1Zm2.11-6.36a1 1 0 0 1 1.41 0l.74.74A1 1 0 1 1 8.41 8l-.74-.74a1 1 0 0 1 0-1.41ZM7.05 16.6a1 1 0 0 1 1.41 0l.74.74A1 1 0 1 1 7.8 18.8l-.74-.74a1 1 0 0 1 0-1.41Z" />
-              </svg>
-            ) : (
-              <svg viewBox="0 0 24 24" aria-hidden className="icon">
-                <path d="M21 12a9 9 0 0 1-9 9 9 9 0 0 1-8.94-8.05 1 1 0 0 1 1.53-.93 5.5 5.5 0 0 0 7.62-7.62 1 1 0 0 1-.93-1.53A9 9 0 0 1 21 12Z" />
-              </svg>
-            )}
-          </button>
+          <a className="button button-primary" href="#contacto">
+            Escríbeme
+          </a>
         </div>
       </header>
 
       <main>
         <section id="hero" className="hero reveal">
           <div className="hero-content">
-            <span className="eyebrow">{content.hero.eyebrow}</span>
-            <h1>{content.hero.title}</h1>
-            <p>{content.hero.description}</p>
+            <span className="eyebrow">Estudiante de Medicina • Clínica • Investigación</span>
+            <h1>Cuidar con ciencia, liderar con humanidad.</h1>
+            <p>
+              Soy <strong>Nath</strong>, estudiante de Medicina con vocación por la atención integral, la educación para la salud y la investigación clínica. Creo en la medicina basada en evidencia y en el trato humano que escucha, explica y acompaña.
+            </p>
             <div className="hero-actions">
-              <a href="#contact" className="button button-primary">
-                {content.hero.primaryAction}
+              <a href="/nath-cv.pdf" className="button button-primary" target="_blank" rel="noreferrer">
+                Ver CV
               </a>
-              <a href="#showcase" className="button button-secondary">
-                {content.hero.secondaryAction}
+              <a
+                href="https://www.linkedin.com/in/<usuario>"
+                className="button button-secondary"
+                target="_blank"
+                rel="noreferrer"
+              >
+                LinkedIn
+              </a>
+              <a
+                href="https://www.researchgate.net/profile/<usuario>"
+                className="button button-secondary"
+                target="_blank"
+                rel="noreferrer"
+              >
+                ResearchGate
               </a>
             </div>
-            <dl className="hero-stats">
-              {content.hero.stats.map((stat) => (
-                <div key={stat.label}>
-                  <dt>{stat.value}</dt>
-                  <dd>{stat.label}</dd>
-                </div>
-              ))}
-            </dl>
+            <div className="floating-badges" aria-hidden>
+              <span className="floating-badge">Atención centrada en la persona</span>
+              <span className="floating-badge">Evidencia + empatía</span>
+            </div>
           </div>
           <div className="hero-visual" aria-hidden>
             <div className="hero-planet" />
@@ -520,41 +178,85 @@ function App() {
           </div>
         </section>
 
-        <section id="about" className="section reveal">
+        <section id="perfil" className="section reveal">
           <div className="section-header">
-            <span className="eyebrow">{content.about.eyebrow}</span>
-            <h2>{content.about.title}</h2>
+            <span className="eyebrow">Perfil</span>
+            <h2>Perfil</h2>
           </div>
           <div className="section-body">
             <div className="section-text">
-              {content.about.paragraphs.map((paragraph, index) => (
-                <p key={index}>{paragraph}</p>
-              ))}
-              <div className="signature">{content.about.signature}</div>
+              <p>
+                Soy estudiante de Medicina con interés en medicina familiar y salud pública. Me motiva traducir la evidencia científica a un lenguaje claro para que cada paciente entienda su diagnóstico, tratamiento y opciones. He participado en iniciativas de promoción de la salud, campañas de vacunación y proyectos de alfabetización en salud. Busco integrarme a equipos multidisciplinarios donde la ética, la calidad y la comunicación sean pilares del cuidado.
+              </p>
             </div>
-            <div className="highlight-grid">
-              {content.about.highlights.map((highlight) => (
-                <article key={highlight.title} className="highlight-card">
-                  <h3>{highlight.title}</h3>
-                  <p>{highlight.text}</p>
-                </article>
+            <div className="chip-grid">
+              {['Atención primaria', 'Promoción de la salud', 'Educación para pacientes', 'Investigación clínica'].map((chip) => (
+                <span key={chip} className="chip chip-tag">
+                  {chip}
+                </span>
               ))}
             </div>
           </div>
         </section>
 
-        <section id="journey" className="section reveal">
+        <section className="section reveal" aria-labelledby="disponibilidad">
           <div className="section-header">
-            <span className="eyebrow">{content.journey.eyebrow}</span>
-            <h2>{content.journey.title}</h2>
+            <span className="eyebrow" id="disponibilidad">
+              Disponibilidad
+            </span>
+            <h2>Rotaciones y voluntariado</h2>
+          </div>
+          <div className="availability">
+            <ul>
+              {availability.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+            <a href="#contacto" className="availability-link">
+              Proponer colaboración →
+            </a>
+          </div>
+        </section>
+
+        <section id="experiencia" className="section reveal">
+          <div className="section-header">
+            <span className="eyebrow">Experiencia</span>
+            <h2>Experiencia clínica, educativa e investigadora</h2>
+            <p>
+              Acompaño procesos de salud en entornos comunitarios, escolares y académicos con un enfoque que integra ciencia, pedagogía y empatía.
+            </p>
+          </div>
+          <div className="experience-grid">
+            {experience.map((item) => (
+              <article key={item.role} className="experience-card">
+                <div className="experience-header">
+                  <h3>{item.role}</h3>
+                  <span className="experience-place">{item.place}</span>
+                  <span className="experience-dates">{item.dates}</span>
+                </div>
+                <ul>
+                  {item.bullets.map((point) => (
+                    <li key={point}>{point}</li>
+                  ))}
+                </ul>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className="section reveal" aria-labelledby="linea-tiempo">
+          <div className="section-header">
+            <span className="eyebrow" id="linea-tiempo">
+              Línea de tiempo
+            </span>
+            <h2>Hitos de formación</h2>
           </div>
           <div className="timeline">
-            {content.journey.items.map((item) => (
-              <article key={item.title} className="timeline-item">
+            {timeline.map((item) => (
+              <article key={item.period} className="timeline-item">
                 <div className="timeline-marker" />
                 <div className="timeline-content">
                   <span className="timeline-period">{item.period}</span>
-                  <h3>{item.title}</h3>
                   <p>{item.description}</p>
                 </div>
               </article>
@@ -562,42 +264,76 @@ function App() {
           </div>
         </section>
 
-        <section id="showcase" className="section reveal">
+        <section id="investigacion" className="section reveal">
           <div className="section-header">
-            <span className="eyebrow">{content.showcase.eyebrow}</span>
-            <h2>{content.showcase.title}</h2>
-            <p>{content.showcase.description}</p>
+            <span className="eyebrow">Investigación</span>
+            <h2>Proyectos y difusión científica</h2>
+            <p>¿Tienes un nuevo proyecto o publicación? Añádelo aquí con un enlace o PDF.</p>
           </div>
           <div className="card-grid">
-            {content.showcase.items.map((item) => (
+            {research.map((item) => (
               <article key={item.title} className="project-card">
                 <span className="badge">{item.badge}</span>
                 <h3>{item.title}</h3>
-                <p>{item.description}</p>
+                <p>{item.venue}</p>
+                <a href={item.link} className="project-link">
+                  Consultar proyecto →
+                </a>
               </article>
             ))}
           </div>
         </section>
 
-        <section id="contact" className="section contact reveal">
+        <section id="contacto" className="section contact reveal">
           <div className="section-header">
-            <span className="eyebrow">{content.contact.eyebrow}</span>
-            <h2>{content.contact.title}</h2>
-            <p>{content.contact.description}</p>
+            <span className="eyebrow">Contacto</span>
+            <h2>Conversemos</h2>
+            <p>
+              Para oportunidades clínicas, investigación o proyectos de educación para la salud, escríbeme y con gusto responderé. Me interesan equipos colaborativos con enfoque en calidad, ética y comunicación clara.
+            </p>
           </div>
-          <div className="contact-actions">
-            <a href="mailto:lorem@ipsum.com" className="button button-primary">
-              {content.contact.primaryAction}
-            </a>
-            <a href="#hero" className="button button-secondary">
-              {content.contact.secondaryAction}
-            </a>
+          <div className="contact-layout">
+            <div className="contact-actions">
+              <a href="mailto:nath@example.com" className="button button-primary">
+                Escríbeme
+              </a>
+              <a
+                href="mailto:nath@example.com?subject=Solicitud%20de%20reunión"
+                className="button button-primary ghost"
+              >
+                Agendar una reunión
+              </a>
+              <span className="contact-email">nath@example.com</span>
+            </div>
+            <div className="contact-meta">
+              <dl>
+                <div>
+                  <dt>Ciudad</dt>
+                  <dd>Monterrey, MX</dd>
+                </div>
+                <div>
+                  <dt>Intereses</dt>
+                  <dd>medicina familiar, educación en salud, geriatría</dd>
+                </div>
+                <div>
+                  <dt>Idiomas</dt>
+                  <dd>español, inglés</dd>
+                </div>
+              </dl>
+              <div className="chip-grid">
+                {['Empatía', 'Ética', 'Trabajo en equipo', 'Aprendizaje continuo'].map((chip) => (
+                  <span key={chip} className="chip chip-tag">
+                    {chip}
+                  </span>
+                ))}
+              </div>
+            </div>
           </div>
         </section>
       </main>
 
       <footer className="site-footer">
-        <p>{content.footer}</p>
+        <p>Nath — Medicina. Atención basada en evidencia y trato humano.</p>
       </footer>
     </div>
   )
