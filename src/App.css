@@ -466,6 +466,10 @@ main {
   display: flex;
   align-items: center;
   justify-content: center;
+  justify-self: flex-end;
+  align-self: center;
+  margin-inline-start: auto;
+  animation: heroDrift 18s ease-in-out infinite;
 }
 
 .portrait-frame {
@@ -947,6 +951,19 @@ main {
   }
 }
 
+@keyframes heroDrift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  40% {
+    transform: translate3d(1.5rem, -0.75rem, 0) scale(1.02);
+  }
+  70% {
+    transform: translate3d(-1rem, 0.5rem, 0) scale(0.98);
+  }
+}
+
 @keyframes rotate {
   from {
     transform: rotate(0deg);
@@ -978,10 +995,15 @@ main {
     animation: none;
     opacity: 0.8;
   }
-  
+
   .reveal {
     animation: none;
     opacity: 1;
+    transform: none;
+  }
+
+  .hero-visual {
+    animation: none;
     transform: none;
   }
 }
