@@ -39,8 +39,15 @@ export function Header({
   return (
     <header className="site-header">
       <div className="brand" aria-label={header.brandDescription}>
-        <span className="brand-mark" />
-        <span className="brand-name">{header.brandName}</span>
+        <span className="brand-mark">
+          <span className="brand-mark-glint" aria-hidden />
+        </span>
+        <span className="brand-name">
+          {header.brandName}
+          <span className="brand-star" aria-hidden>
+            ✶
+          </span>
+        </span>
       </div>
 
       <nav

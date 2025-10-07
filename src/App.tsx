@@ -8,6 +8,7 @@ import { ExperienceSection } from './components/ExperienceSection'
 import { TimelineSection } from './components/TimelineSection'
 import { ResearchSection } from './components/ResearchSection'
 import { ContactSection } from './components/ContactSection'
+import { SecretLetterPage } from './components/SecretLetterPage'
 import { sectionIds } from './constants/sections'
 import { languageNames, translations } from './data/translations'
 import type { Locale, Theme } from './types/content'
@@ -41,6 +42,11 @@ function App() {
   })
 
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [isSecretRoute] = useState(() => {
+    if (typeof window === 'undefined') return false
+    const path = window.location.pathname.toLowerCase()
+    return path === '/sqm/letter' || path.startsWith('/sqm/letter/')
+  })
   const t = translations[locale]
 
   useEffect(() => {
@@ -143,6 +149,19 @@ function App() {
   }
 
   const scheduleMailTo = `mailto:nath@example.com?subject=${encodeURIComponent(t.contact.scheduleSubject)}`
+
+  if (isSecretRoute) {
+    const themeToggleLabel = theme === 'dark' ? t.header.themeLightLabel : t.header.themeDarkLabel
+    return (
+      <SecretLetterPage
+        brandName={t.header.brandName}
+        password="041025"
+        theme={theme}
+        themeToggleLabel={themeToggleLabel}
+        onToggleTheme={toggleTheme}
+      />
+    )
+  }
 
   return (
     <div className="app-shell">
