@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import type { FormEvent } from 'react'
 import type { Theme } from '../types/content'
 
@@ -27,6 +27,20 @@ export function SecretLetterPage({
   const [passwordInput, setPasswordInput] = useState('')
   const [isUnlocked, setIsUnlocked] = useState(false)
   const [error, setError] = useState<string | null>(null)
+
+  useEffect(() => {
+    if (typeof document === 'undefined') {
+      return
+    }
+
+    const rootElement = document.documentElement
+    const previousFontSize = rootElement.style.fontSize
+    rootElement.style.fontSize = '50%'
+
+    return () => {
+      rootElement.style.fontSize = previousFontSize
+    }
+  }, [])
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
