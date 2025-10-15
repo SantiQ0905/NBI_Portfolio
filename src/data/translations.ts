@@ -138,6 +138,36 @@ export const translations: Record<Locale, Translation> = {
       eyebrow: 'Contacto',
       title: 'Conversemos',
       body: 'Para oportunidades clínicas, investigación o proyectos de educación para la salud, escríbeme y con gusto responderé. Me interesan equipos colaborativos con enfoque en calidad, ética y comunicación clara.',
+      form: {
+        title: 'Envíame un mensaje',
+        fields: {
+          name: {
+            label: 'Nombre *',
+            placeholder: 'Tu nombre completo'
+          },
+          email: {
+            label: 'Correo electrónico *',
+            placeholder: 'tu.correo@ejemplo.com'
+          },
+          subject: {
+            label: 'Asunto',
+            placeholder: '¿De qué se trata?'
+          },
+          message: {
+            label: 'Mensaje *',
+            placeholder: 'Cuéntame sobre tu proyecto, idea de colaboración o cualquier pregunta que tengas...'
+          }
+        },
+        submitButton: 'Enviar mensaje',
+        submitting: 'Enviando...',
+        success: '¡Mensaje enviado exitosamente! Te responderé pronto.',
+        error: 'Algo salió mal. Por favor intenta de nuevo o envíame un correo directamente.'
+      },
+      info: {
+        title: 'Mantengamos contacto',
+        emailSubtitle: 'nath@example.com',
+        scheduleSubtitle: 'Charla de 15-30 min'
+      },
       buttons: {
         primary: 'Escríbeme',
         schedule: 'Agendar una reunión',
@@ -151,7 +181,35 @@ export const translations: Record<Locale, Translation> = {
       chips: ['Empatía', 'Ética', 'Trabajo en equipo', 'Aprendizaje continuo'],
       emailLabel: 'nath@example.com',
     },
-    footer: 'Nath — Medicina. Atención basada en evidencia y trato humano.',
+    footer: {
+      brand: {
+        tagline: 'Medicina e Investigación',
+        description: 'Nath — Medicina. Atención basada en evidencia y trato humano.'
+      },
+      links: {
+        title: 'Enlaces rápidos',
+        profile: 'Perfil',
+        experience: 'Experiencia', 
+        research: 'Investigación',
+        contact: 'Contacto'
+      },
+      social: {
+        title: 'Conectar',
+        linkedin: 'LinkedIn',
+        researchGate: 'ResearchGate',
+        email: 'Correo'
+      },
+      settings: {
+        title: 'Preferencias',
+        theme: 'Tema',
+        language: 'Idioma',
+        light: 'Claro',
+        dark: 'Oscuro'
+      },
+      copyright: 'Todos los derechos reservados.',
+      builtWith: 'Creado con cuidado y atención al detalle',
+      backToTop: 'Volver arriba'
+    },
   },
   en: {
     header: {
@@ -283,6 +341,36 @@ export const translations: Record<Locale, Translation> = {
       eyebrow: 'Contact',
       title: "Let's connect",
       body: 'For clinical, research, or health-education collaborations, send me a message and I will be happy to reply. I value collaborative teams focused on quality, ethics, and clear communication.',
+      form: {
+        title: 'Send me a message',
+        fields: {
+          name: {
+            label: 'Name *',
+            placeholder: 'Your full name'
+          },
+          email: {
+            label: 'Email *',
+            placeholder: 'your.email@example.com'
+          },
+          subject: {
+            label: 'Subject',
+            placeholder: 'What\'s this about?'
+          },
+          message: {
+            label: 'Message *',
+            placeholder: 'Tell me about your project, collaboration idea, or any questions you have...'
+          }
+        },
+        submitButton: 'Send Message',
+        submitting: 'Sending...',
+        success: 'Message sent successfully! I\'ll get back to you soon.',
+        error: 'Something went wrong. Please try again or email me directly.'
+      },
+      info: {
+        title: 'Get in touch',
+        emailSubtitle: 'nath@example.com',
+        scheduleSubtitle: '15-30 min chat'
+      },
       buttons: {
         primary: 'Email me',
         schedule: 'Schedule a meeting',
@@ -296,7 +384,35 @@ export const translations: Record<Locale, Translation> = {
       chips: ['Empathy', 'Ethics', 'Teamwork', 'Continuous learning'],
       emailLabel: 'nath@example.com',
     },
-    footer: 'Nath — Medicine. Evidence-based care with a human touch.',
+    footer: {
+      brand: {
+        tagline: 'Medicine & Research',
+        description: 'Nath — Medicine. Evidence-based care with a human touch.'
+      },
+      links: {
+        title: 'Quick Links',
+        profile: 'Profile',
+        experience: 'Experience',
+        research: 'Research',
+        contact: 'Contact'
+      },
+      social: {
+        title: 'Connect',
+        linkedin: 'LinkedIn',
+        researchGate: 'ResearchGate',
+        email: 'Email'
+      },
+      settings: {
+        title: 'Preferences',
+        theme: 'Theme',
+        language: 'Language',
+        light: 'Light',
+        dark: 'Dark'
+      },
+      copyright: 'All rights reserved.',
+      builtWith: 'Built with care and attention to detail',
+      backToTop: 'Back to top'
+    },
   },
   de: {
     header: {
@@ -428,6 +544,36 @@ export const translations: Record<Locale, Translation> = {
       eyebrow: 'Kontakt',
       title: 'Lass uns sprechen',
       body: 'Für klinische Einsätze, Forschung oder Gesundheitsbildungsprojekte freue ich mich über deine Nachricht. Mir sind Teams wichtig, die Zusammenarbeit, Qualität, Ethik und klare Kommunikation leben.',
+      form: {
+        title: 'Schicke mir eine Nachricht',
+        fields: {
+          name: {
+            label: 'Name *',
+            placeholder: 'Dein vollständiger Name'
+          },
+          email: {
+            label: 'E-Mail *',
+            placeholder: 'deine.email@beispiel.com'
+          },
+          subject: {
+            label: 'Betreff',
+            placeholder: 'Worum geht es?'
+          },
+          message: {
+            label: 'Nachricht *',
+            placeholder: 'Erzähl mir von deinem Projekt, deiner Kollaborationsidee oder jeglichen Fragen die du hast...'
+          }
+        },
+        submitButton: 'Nachricht senden',
+        submitting: 'Sende...',
+        success: 'Nachricht erfolgreich gesendet! Ich melde mich bald bei dir.',
+        error: 'Etwas ist schiefgelaufen. Bitte versuche es erneut oder schreibe mir direkt eine E-Mail.'
+      },
+      info: {
+        title: 'Kontakt aufnehmen',
+        emailSubtitle: 'nath@example.com',
+        scheduleSubtitle: '15-30 Min. Gespräch'
+      },
       buttons: {
         primary: 'E-Mail senden',
         schedule: 'Termin vereinbaren',
@@ -441,6 +587,34 @@ export const translations: Record<Locale, Translation> = {
       chips: ['Empathie', 'Ethik', 'Teamarbeit', 'Lebenslanges Lernen'],
       emailLabel: 'nath@example.com',
     },
-    footer: 'Nath — Medizin. Evidenzbasierte Versorgung mit menschlicher Nähe.',
+    footer: {
+      brand: {
+        tagline: 'Medizin & Forschung',
+        description: 'Nath — Medizin. Evidenzbasierte Versorgung mit menschlicher Nähe.'
+      },
+      links: {
+        title: 'Schnelllinks',
+        profile: 'Profil',
+        experience: 'Erfahrung',
+        research: 'Forschung',
+        contact: 'Kontakt'
+      },
+      social: {
+        title: 'Verbinden',
+        linkedin: 'LinkedIn',
+        researchGate: 'ResearchGate',
+        email: 'E-Mail'
+      },
+      settings: {
+        title: 'Einstellungen',
+        theme: 'Design',
+        language: 'Sprache',
+        light: 'Hell',
+        dark: 'Dunkel'
+      },
+      copyright: 'Alle Rechte vorbehalten.',
+      builtWith: 'Mit Sorgfalt und Aufmerksamkeit zum Detail erstellt',
+      backToTop: 'Nach oben'
+    },
   },
 }

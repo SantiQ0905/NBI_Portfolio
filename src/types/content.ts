@@ -99,6 +99,36 @@ export type ContactTranslation = {
   eyebrow: string
   title: string
   body: string
+  form: {
+    title: string
+    fields: {
+      name: {
+        label: string
+        placeholder: string
+      }
+      email: {
+        label: string
+        placeholder: string
+      }
+      subject: {
+        label: string
+        placeholder: string
+      }
+      message: {
+        label: string
+        placeholder: string
+      }
+    }
+    submitButton: string
+    submitting: string
+    success: string
+    error: string
+  }
+  info: {
+    title: string
+    emailSubtitle: string
+    scheduleSubtitle: string
+  }
   buttons: {
     primary: string
     schedule: string
@@ -107,6 +137,36 @@ export type ContactTranslation = {
   details: ContactDetail[]
   chips: string[]
   emailLabel: string
+}
+
+export type FooterTranslation = {
+  brand: {
+    tagline: string
+    description: string
+  }
+  links: {
+    title: string
+    profile: string
+    experience: string
+    research: string
+    contact: string
+  }
+  social: {
+    title: string
+    linkedin: string
+    researchGate: string
+    email: string
+  }
+  settings: {
+    title: string
+    theme: string
+    language: string
+    light: string
+    dark: string
+  }
+  copyright: string
+  builtWith: string
+  backToTop: string
 }
 
 export type Translation = {
@@ -119,5 +179,5 @@ export type Translation = {
   timeline: TimelineTranslation
   research: ResearchTranslation
   contact: ContactTranslation
-  footer: string
+  footer: FooterTranslation
 }

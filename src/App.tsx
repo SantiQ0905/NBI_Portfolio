@@ -8,6 +8,7 @@ import { ExperienceSection } from './components/ExperienceSection'
 import { TimelineSection } from './components/TimelineSection'
 import { ResearchSection } from './components/ResearchSection'
 import { ContactSection } from './components/ContactSection'
+import { Footer } from './components/Footer'
 import { SecretLetterPage } from './components/SecretLetterPage'
 import { sectionIds } from './constants/sections'
 import { languageNames, translations } from './data/translations'
@@ -164,7 +165,7 @@ function App() {
   }
 
   return (
-    <div className="app-shell">
+    <div id="top" className="app-shell">
       <div className="orb orb-one" aria-hidden />
       <div className="orb orb-two" aria-hidden />
 
@@ -188,16 +189,20 @@ function App() {
         <ExperienceSection experience={t.experience} sectionId={sectionIds.experience} />
         <TimelineSection timeline={t.timeline} />
         <ResearchSection research={t.research} sectionId={sectionIds.research} />
-        <ContactSection
-          contact={t.contact}
-          sectionId={sectionIds.contact}
-          scheduleMailTo={scheduleMailTo}
-        />
       </main>
 
-      <footer className="site-footer">
-        <p>{t.footer}</p>
-      </footer>
+      <ContactSection
+        contact={t.contact}
+        sectionId={sectionIds.contact}
+        scheduleMailTo={scheduleMailTo}
+      />
+
+      <Footer
+        footer={t.footer}
+        locale={locale}
+        theme={theme}
+        onToggleTheme={toggleTheme}
+      />
     </div>
   )
 }
