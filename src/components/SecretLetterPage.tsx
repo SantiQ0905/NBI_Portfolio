@@ -123,11 +123,6 @@ export function SecretLetterPage({
               {placeholderLetter.map((paragraph) => (
                 <p key={paragraph.slice(0, 30)}>{paragraph}</p>
               ))}
-              <p className="secret-note">
-                Cuando quieras reemplazar este texto por tu carta, actualiza el contenido en
-                <code>src/components/SecretLetterPage.tsx</code> dentro del arreglo
-                <code>placeholderLetter</code>.
-              </p>
             </article>
           )}
         </section>
