@@ -11,6 +11,13 @@
   color: var(--color-text-primary);
   background: radial-gradient(circle at top left, var(--color-surface-glow) 0%, transparent 45%),
     radial-gradient(circle at 80% 20%, var(--color-surface-glow-strong) 0%, transparent 50%);
+  overflow-x: clip;
+}
+
+@supports not (overflow: clip) {
+  .app-shell {
+    overflow-x: hidden;
+  }
 }
 
 .orb {
@@ -21,24 +28,46 @@
   z-index: 0;
   pointer-events: none;
   will-change: transform;
+  transform: translate3d(var(--orb-offset-x, 0px), var(--orb-offset-y, 0px), 0);
 }
 
 .orb-one {
-  width: 26rem;
-  height: 26rem;
-  top: -8rem;
-  left: -10rem;
+  width: clamp(18rem, 55vw, 26rem);
+  height: clamp(18rem, 55vw, 26rem);
+  top: clamp(2rem, 6vw, 4rem);
+  left: clamp(1.5rem, 7vw, 4rem);
   background: var(--color-accent);
   animation: float 16s ease-in-out infinite;
+  --orb-offset-x: -55%;
+  --orb-offset-y: -60%;
 }
 
 .orb-two {
-  width: 18rem;
-  height: 18rem;
-  bottom: -6rem;
-  right: -8rem;
+  width: clamp(14rem, 45vw, 18rem);
+  height: clamp(14rem, 45vw, 18rem);
+  bottom: clamp(2.5rem, 8vw, 5rem);
+  right: clamp(1.5rem, 7vw, 4rem);
   background: var(--color-accent-soft);
   animation: float 18s ease-in-out infinite reverse;
+  --orb-offset-x: 55%;
+  --orb-offset-y: 65%;
+}
+
+@media (max-width: 600px) {
+  .orb {
+    filter: blur(45px);
+  }
+
+  .orb-one {
+    --orb-offset-x: -45%;
+    --orb-offset-y: -50%;
+  }
+
+  .orb-two {
+    --orb-offset-x: 45%;
+    --orb-offset-y: 55%;
+    bottom: clamp(2rem, 12vw, 4rem);
+  }
 }
 
 /* ============================================
@@ -1984,10 +2013,10 @@ main {
 @keyframes float {
   0%,
   100% {
-    transform: translate3d(0, 0, 0);
+    transform: translate3d(var(--orb-offset-x, 0px), var(--orb-offset-y, 0px), 0);
   }
   50% {
-    transform: translate3d(0, -14px, 0);
+    transform: translate3d(var(--orb-offset-x, 0px), calc(var(--orb-offset-y, 0px) - 14px), 0);
   }
 }
 
