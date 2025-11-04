@@ -201,7 +201,9 @@ function App() {
         footer={t.footer}
         locale={locale}
         theme={theme}
+        languageNames={languageNames}
         onToggleTheme={toggleTheme}
+        onLocaleChange={handleLocaleChange}
       />
     </div>
   )

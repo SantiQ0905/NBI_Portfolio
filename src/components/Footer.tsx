@@ -1,13 +1,16 @@
 import type { Locale, FooterTranslation } from '../types/content'
+import { sectionIds } from '../constants/sections'
 
 export type FooterProps = {
   footer: FooterTranslation
   locale: Locale
   theme: 'light' | 'dark'
+  languageNames: Record<Locale, string>
   onToggleTheme: () => void
+  onLocaleChange: (locale: Locale) => void
 }
 
-export function Footer({ footer, locale, theme, onToggleTheme }: FooterProps) {
+export function Footer({ footer, locale, theme, languageNames, onToggleTheme, onLocaleChange }: FooterProps) {
   const currentYear = new Date().getFullYear()
   
   const socialLinks = [
@@ -28,14 +31,7 @@ export function Footer({ footer, locale, theme, onToggleTheme }: FooterProps) {
     }
   ]
 
-  const getLanguageLabel = (locale: Locale) => {
-    switch (locale) {
-      case 'es': return 'Español'
-      case 'en': return 'English'
-      case 'de': return 'Deutsch'
-      default: return 'English'
-    }
-  }
+  const availableLocales: Locale[] = ['es', 'en', 'de']
 
   return (
     <footer className="site-footer">
@@ -62,10 +58,10 @@ export function Footer({ footer, locale, theme, onToggleTheme }: FooterProps) {
           <div className="footer-links">
             <h4>{footer.links.title}</h4>
             <nav className="footer-nav">
-              <a href="#profile" className="footer-link">{footer.links.profile}</a>
-              <a href="#experience" className="footer-link">{footer.links.experience}</a>
-              <a href="#research" className="footer-link">{footer.links.research}</a>
-              <a href="#contact" className="footer-link">{footer.links.contact}</a>
+              <a href={`#${sectionIds.profile}`} className="footer-link">{footer.links.profile}</a>
+              <a href={`#${sectionIds.experience}`} className="footer-link">{footer.links.experience}</a>
+              <a href={`#${sectionIds.research}`} className="footer-link">{footer.links.research}</a>
+              <a href={`#${sectionIds.contact}`} className="footer-link">{footer.links.contact}</a>
             </nav>
           </div>
 
@@ -112,9 +108,18 @@ export function Footer({ footer, locale, theme, onToggleTheme }: FooterProps) {
               
               <div className="footer-control">
                 <label className="footer-control-label">{footer.settings.language}</label>
-                <div className="footer-language-display">
-                  <span className="footer-language-icon">🌐</span>
-                  <span>{getLanguageLabel(locale)}</span>
+                <div className="footer-language-selector">
+                  {availableLocales.map((availableLocale) => (
+                    <button
+                      key={availableLocale}
+                      onClick={() => onLocaleChange(availableLocale)}
+                      className={`footer-language-option ${locale === availableLocale ? 'active' : ''}`}
+                      aria-label={`Change language to ${languageNames[availableLocale]}`}
+                    >
+                      <span className="footer-language-code">{availableLocale.toUpperCase()}</span>
+                      <span className="footer-language-name">{languageNames[availableLocale]}</span>
+                    </button>
+                  ))}
                 </div>
               </div>
             </div>
