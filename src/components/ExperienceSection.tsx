@@ -1,3 +1,4 @@
+import styles from './ExperienceSection.module.css'
 import type { ExperienceTranslation } from '../types/content'
 
 export type ExperienceSectionProps = {
@@ -13,13 +14,13 @@ export function ExperienceSection({ experience, sectionId }: ExperienceSectionPr
         <h2>{experience.title}</h2>
         <p>{experience.intro}</p>
       </div>
-      <div className="experience-grid">
+      <div className={styles.experienceGrid}>
         {experience.items.map((item) => (
-          <article key={item.role} className="experience-card">
-            <div className="experience-header">
+          <article key={item.role} className={styles.experienceCard}>
+            <div className={styles.experienceHeader}>
               <h3>{item.role}</h3>
-              <span className="experience-place">{item.place}</span>
-              <span className="experience-dates">{item.dates}</span>
+              <span className={styles.experiencePlace}>{item.place}</span>
+              <span className={styles.experienceDates}>{item.dates}</span>
             </div>
             <ul>
               {item.bullets.map((point) => (

@@ -1,0 +1,363 @@
+/* ============================================
+   GLOBAL STYLES
+   App-level layout, animations, and utilities
+   ============================================ */
+
+#root {
+  min-height: 100vh;
+}
+
+.app-shell {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  color: var(--color-text-primary);
+  background: radial-gradient(circle at top left, var(--color-surface-glow) 0%, transparent 45%),
+    radial-gradient(circle at 80% 20%, var(--color-surface-glow-strong) 0%, transparent 50%);
+  overflow-x: clip;
+}
+
+@supports not (overflow: clip) {
+  .app-shell {
+    overflow-x: hidden;
+  }
+}
+
+/* ============================================
+   BACKGROUND ORBS
+   ============================================ */
+
+.orb {
+  position: absolute;
+  border-radius: 999px;
+  filter: blur(60px);
+  opacity: 0.35;
+  z-index: 0;
+  pointer-events: none;
+  will-change: transform;
+  transform: translate3d(var(--orb-offset-x, 0px), var(--orb-offset-y, 0px), 0);
+}
+
+.orb-one {
+  width: clamp(18rem, 55vw, 26rem);
+  height: clamp(18rem, 55vw, 26rem);
+  top: clamp(2rem, 6vw, 4rem);
+  left: clamp(1.5rem, 7vw, 4rem);
+  background: var(--color-accent);
+  animation: float 16s ease-in-out infinite;
+  --orb-offset-x: -55%;
+  --orb-offset-y: -60%;
+}
+
+.orb-two {
+  width: clamp(14rem, 45vw, 18rem);
+  height: clamp(14rem, 45vw, 18rem);
+  bottom: clamp(2.5rem, 8vw, 5rem);
+  right: clamp(1.5rem, 7vw, 4rem);
+  background: var(--color-accent-soft);
+  animation: float 18s ease-in-out infinite reverse;
+  --orb-offset-x: 55%;
+  --orb-offset-y: 65%;
+}
+
+@media (max-width: 600px) {
+  .orb {
+    filter: blur(45px);
+  }
+
+  .orb-one {
+    --orb-offset-x: -45%;
+    --orb-offset-y: -50%;
+  }
+
+  .orb-two {
+    --orb-offset-x: 45%;
+    --orb-offset-y: 55%;
+    bottom: clamp(2rem, 12vw, 4rem);
+  }
+}
+
+/* ============================================
+   MAIN LAYOUT
+   ============================================ */
+
+main {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  padding-bottom: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--color-text-accent);
+  margin-bottom: 0.8rem;
+}
+
+.signature {
+  margin-top: 1rem;
+  font-family: 'Caveat', cursive;
+  font-size: 1.8rem;
+  color: var(--color-text-primary);
+}
+
+/* ============================================
+   BUTTONS
+   ============================================ */
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1.4rem 2.6rem;
+  border-radius: 0.75rem;
+  font-size: 1.6rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  transition: all 0.25s ease;
+  white-space: nowrap;
+}
+
+.button-primary {
+  background: var(--color-accent);
+  color: white;
+}
+
+.button-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(99, 102, 241, 0.28);
+}
+
+.button-secondary {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-primary);
+}
+
+.button-secondary:hover {
+  border-color: var(--color-accent);
+}
+
+.button-primary.ghost {
+  background: transparent;
+  border: 2px solid var(--color-accent);
+  color: var(--color-accent);
+  padding: 1.3rem 2.5rem;
+}
+
+.button-primary.ghost:hover {
+  background: color-mix(in srgb, var(--color-accent) 12%, transparent);
+}
+
+/* ============================================
+   CHIPS/TAGS
+   ============================================ */
+
+.chip {
+  padding: 0.7rem 1.4rem;
+  border-radius: 999px;
+  border: 1px solid var(--color-border);
+  background: color-mix(in srgb, var(--color-surface) 90%, transparent);
+  color: var(--color-text-secondary);
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+.chip-tag {
+  background: color-mix(in srgb, var(--color-accent) 14%, transparent);
+  color: var(--color-text-primary);
+  border: none;
+}
+
+.chip-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-self: flex-start;
+}
+
+/* ============================================
+   SECTION LAYOUTS
+   ============================================ */
+
+.section {
+  padding: clamp(3rem, 8vw, 5rem) clamp(1rem, 5vw, 4rem);
+}
+
+.section + .section {
+  border-top: 1px solid var(--color-border-soft);
+}
+
+.section-header {
+  max-width: 48rem;
+  margin-bottom: 2.5rem;
+}
+
+.section-header h2 {
+  margin: 0.75rem 0;
+  font-size: clamp(4rem, 8vw, 6rem);
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.section-header p {
+  margin: 0;
+  color: var(--color-text-secondary);
+  line-height: 1.8;
+  font-size: 1.6rem;
+  max-width: 60rem;
+}
+
+.section-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+  gap: clamp(2rem, 5vw, 3rem);
+  align-items: start;
+  width: 100%;
+}
+
+.section-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  color: var(--color-text-secondary);
+  font-size: 1.5rem;
+  line-height: 1.8;
+}
+
+/* ============================================
+   REVEAL ANIMATION
+   ============================================ */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+  will-change: opacity, transform;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============================================
+   KEYFRAME ANIMATIONS
+   ============================================ */
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translate3d(var(--orb-offset-x, 0px), var(--orb-offset-y, 0px), 0);
+  }
+  50% {
+    transform: translate3d(var(--orb-offset-x, 0px), calc(var(--orb-offset-y, 0px) - 14px), 0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes brandGlint {
+  0%,
+  55% {
+    opacity: 0;
+    transform: translate(-50%, -40%) rotate(32deg) scale(0.85);
+  }
+  65% {
+    opacity: 0.9;
+    transform: translate(-35%, -110%) rotate(32deg) scale(1);
+  }
+  75%,
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -40%) rotate(32deg) scale(0.85);
+  }
+}
+
+@keyframes heroDrift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  40% {
+    transform: translate3d(1.5rem, -0.75rem, 0) scale(1.02);
+  }
+  70% {
+    transform: translate3d(-1rem, 0.5rem, 0) scale(0.98);
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ============================================
+   ACCESSIBILITY - REDUCED MOTION
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .orb {
+    animation: none;
+  }
+
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

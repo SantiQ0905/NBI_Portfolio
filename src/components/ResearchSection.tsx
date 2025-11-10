@@ -1,3 +1,4 @@
+import styles from './ResearchSection.module.css'
 import type { ResearchTranslation } from '../types/content'
 
 export type ResearchSectionProps = {
@@ -13,13 +14,13 @@ export function ResearchSection({ research, sectionId }: ResearchSectionProps) {
         <h2>{research.title}</h2>
         <p>{research.description}</p>
       </div>
-      <div className="card-grid">
+      <div className={styles.cardGrid}>
         {research.projects.map((item) => (
-          <article key={item.title} className="project-card">
-            <span className="badge">{item.badge}</span>
+          <article key={item.title} className={styles.projectCard}>
+            <span className={styles.badge}>{item.badge}</span>
             <h3>{item.title}</h3>
             <p>{item.venue}</p>
-            <a href={item.link} className="project-link">
+            <a href={item.link} className={styles.projectLink}>
               {research.linkLabel}
             </a>
           </article>

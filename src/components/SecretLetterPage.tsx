@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import type { FormEvent } from 'react'
 import type { Theme } from '../types/content'
+import styles from './SecretLetterPage.module.css'
 
 const placeholderLetter: string[] = [
   'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Aliquam euismod, nibh nec blandit convallis, odio quam pharetra lacus, non tempor mi velit ac sapien. Integer volutpat diam ut dignissim consectetur, at vulputate magna suscipit. Praesent vitae neque vel augue feugiat porta quis eu erat. Suspendisse potenti, et elementum erat volutpat at. Donec fringilla, velit quis gravida volutpat, ex massa tincidunt turpis, sed pulvinar sem magna nec augue. Mauris ac lacus feugiat, euismod felis sed, vestibulum augue. Fusce convallis, arcu non aliquet semper, ligula erat maximus lacus, id laoreet felis mauris eget purus. Vivamus et mi aliquam, porttitor arcu ut, tincidunt eros. Morbi ac mauris fringilla, tempus metus eget, ultrices dolor. Etiam pharetra sem sit amet vehicula dictum. Curabitur quis tellus eget sapien dictum facilisis sed id turpis. Vestibulum pharetra orci ac sapien dignissim, a efficitur eros cursus. Nam elementum.',
@@ -28,19 +29,7 @@ export function SecretLetterPage({
   const [isUnlocked, setIsUnlocked] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
-  useEffect(() => {
-    if (typeof document === 'undefined') {
-      return
-    }
-
-    const rootElement = document.documentElement
-    const previousFontSize = rootElement.style.fontSize
-    rootElement.style.fontSize = '50%'
-
-    return () => {
-      rootElement.style.fontSize = previousFontSize
-    }
-  }, [])
+  // Font size override removed - using responsive CSS instead
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -53,42 +42,44 @@ export function SecretLetterPage({
   }
 
   return (
-    <div className="app-shell secret-shell">
+    <div className={`app-shell ${styles.secretShell}`}>
       <div className="orb orb-one" aria-hidden />
       <div className="orb orb-two" aria-hidden />
 
-      <header className="secret-header">
-        <div className="brand" aria-label={brandName}>
-          <span className="brand-mark">
-            <span className="brand-mark-glint" aria-hidden />
-          </span>
-          <span className="brand-name">
-            {brandName}
-            <span className="brand-star" aria-hidden>
-              ✶
+      <header className={styles.secretHeader}>
+        <div>
+          <div className={styles.brand} aria-label={brandName}>
+            <span className={styles.brandMark}>
+              <span className={styles.brandMarkGlint} aria-hidden />
             </span>
-          </span>
-        </div>
+            <span className={styles.brandName}>
+              {brandName}
+              <span className={styles.brandStar} aria-hidden>
+                ✶
+              </span>
+            </span>
+          </div>
 
-        <div className="secret-controls">
-          <button
-            type="button"
-            className="theme-toggle"
-            aria-label={themeToggleLabel}
-            aria-pressed={theme === 'dark'}
-            onClick={onToggleTheme}
-          >
-            <span aria-hidden>{theme === 'dark' ? '🌞' : '🌙'}</span>
-          </button>
-          <a className="button button-secondary" href="/">
-            Volver al inicio
-          </a>
+          <div className={styles.secretControls}>
+            <button
+              type="button"
+              className={styles.themeToggle}
+              aria-label={themeToggleLabel}
+              aria-pressed={theme === 'dark'}
+              onClick={onToggleTheme}
+            >
+              <span aria-hidden>{theme === 'dark' ? '🌞' : '🌙'}</span>
+            </button>
+            <a className="button button-secondary" href="/">
+              Volver al inicio
+            </a>
+          </div>
         </div>
       </header>
 
-      <main className="secret-main">
-        <section className="secret-card">
-          <div className="secret-card-header">
+      <main className={styles.secretMain}>
+        <section className={styles.secretCard}>
+          <div className={styles.secretCardHeader}>
             <span className="eyebrow">Entrada privada</span>
             <h1>Cuaderno de sentimientos</h1>
             <p>
@@ -98,12 +89,12 @@ export function SecretLetterPage({
           </div>
 
           {!isUnlocked ? (
-            <form className="secret-form" onSubmit={handleSubmit}>
+            <form className={styles.secretForm} onSubmit={handleSubmit}>
               <label htmlFor="secret-password">Contraseña</label>
-              <div className="secret-input-group">
+              <div className={styles.secretInputGroup}>
                 <input
                   id="secret-password"
-                  className="secret-input"
+                  className={styles.secretInput}
                   type="password"
                   autoComplete="off"
                   value={passwordInput}
@@ -115,10 +106,10 @@ export function SecretLetterPage({
                   Desbloquear
                 </button>
               </div>
-              {error ? <p className="secret-error">{error}</p> : null}
+              {error ? <p className={styles.secretError}>{error}</p> : null}
             </form>
           ) : (
-            <article className="secret-letter" aria-live="polite">
+            <article className={styles.secretLetter} aria-live="polite">
               <h2>Carta reservada</h2>
               {placeholderLetter.map((paragraph) => (
                 <p key={paragraph.slice(0, 30)}>{paragraph}</p>

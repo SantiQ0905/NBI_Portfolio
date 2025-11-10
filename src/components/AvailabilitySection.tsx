@@ -1,3 +1,4 @@
+import styles from './AvailabilitySection.module.css'
 import type { AvailabilityTranslation } from '../types/content'
 
 export type AvailabilitySectionProps = {
@@ -14,13 +15,13 @@ export function AvailabilitySection({ availability, contactId }: AvailabilitySec
         </span>
         <h2>{availability.title}</h2>
       </div>
-      <div className="availability">
+      <div className={styles.availability}>
         <ul>
           {availability.items.map((item) => (
             <li key={item}>{item}</li>
           ))}
         </ul>
-        <a href={`#${contactId}`} className="availability-link">
+        <a href={`#${contactId}`} className={styles.availabilityLink}>
           {availability.link}
         </a>
       </div>

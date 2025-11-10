@@ -1,4 +1,5 @@
 import type { ProfileTranslation } from '../types/content'
+import './ProfileSection.module.css'
 
 export type ProfileSectionProps = {
   profile: ProfileTranslation

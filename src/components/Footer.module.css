@@ -1,0 +1,306 @@
+/* ============================================
+   FOOTER COMPONENT STYLES
+   ============================================ */
+
+.siteFooter {
+  margin-top: auto;
+  background: linear-gradient(135deg, 
+    var(--color-surface) 0%,
+    color-mix(in srgb, var(--color-accent) 3%, var(--color-surface)) 100%);
+  border-top: 1px solid var(--color-border-soft);
+  color: var(--color-text-secondary);
+}
+
+.footerContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 clamp(1rem, 5vw, 4rem);
+}
+
+.footerMain {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: clamp(2rem, 4vw, 3rem);
+  padding: clamp(3rem, 6vw, 4rem) 0;
+}
+
+.footerBrand {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.footerLogo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.footerLogoMark {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 0.75rem;
+  background: linear-gradient(135deg, var(--color-accent), var(--color-accent-strong));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: white;
+  font-size: 1.2rem;
+}
+
+.footerBrandText {
+  display: flex;
+  flex-direction: column;
+}
+
+.footerBrandName {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  letter-spacing: 0.02em;
+}
+
+.footerBrandTagline {
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+  letter-spacing: 0.05em;
+}
+
+.footerDescription {
+  margin: 0;
+  line-height: 1.6;
+  font-size: 1rem;
+  max-width: 300px;
+}
+
+.footerLinks h4,
+.footerSocial h4,
+.footerSettings h4 {
+  margin: 0 0 1rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  letter-spacing: 0.02em;
+}
+
+.footerNav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.footerLink {
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  font-size: 1rem;
+  padding: 0.25rem 0;
+  transition: color 0.2s ease;
+}
+
+.footerLink:hover {
+  color: var(--color-accent);
+}
+
+.footerSocialLinks {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.footerSocialLink {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  font-size: 1rem;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.footerSocialLink:hover {
+  color: var(--color-accent);
+  transform: translateX(4px);
+}
+
+.footerSocialIcon {
+  font-size: 1.1rem;
+  width: 1.5rem;
+  text-align: center;
+}
+
+.footerSocialText {
+  font-size: 0.9rem;
+}
+
+.footerControls {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.footerControl {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.footerControlLabel {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--color-text-primary);
+}
+
+.footerThemeToggle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  background: color-mix(in srgb, var(--color-surface) 90%, transparent);
+  border: 1px solid var(--color-border);
+  border-radius: 0.5rem;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.footerThemeToggle:hover {
+  border-color: var(--color-accent);
+  background: color-mix(in srgb, var(--color-surface) 95%, transparent);
+}
+
+.footerThemeIcon {
+  font-size: 1rem;
+}
+
+.footerLanguageSelector {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.footerLanguageOption {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.5rem 0.75rem;
+  background: color-mix(in srgb, var(--color-surface) 90%, transparent);
+  border: 1px solid var(--color-border);
+  border-radius: 0.5rem;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.9rem;
+}
+
+.footerLanguageOption:hover {
+  background: color-mix(in srgb, var(--color-surface) 95%, transparent);
+  border-color: var(--color-accent);
+  color: var(--color-text-primary);
+}
+
+.footerLanguageOption.active {
+  background: color-mix(in srgb, var(--color-accent) 12%, transparent);
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+  font-weight: 600;
+}
+
+.footerLanguageCode {
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  font-size: 0.85rem;
+}
+
+.footerLanguageName {
+  flex: 1;
+  text-align: left;
+  font-size: 0.85rem;
+}
+
+.footerBottom {
+  border-top: 1px solid var(--color-border-soft);
+  padding: 1.5rem 0;
+}
+
+.footerBottomContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.footerCopyright {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.footerCopyright p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+}
+
+.footerBuiltWith {
+  font-size: 0.8rem !important;
+  opacity: 0.7;
+}
+
+.footerMeta {
+  display: flex;
+  align-items: center;
+}
+
+.footerBackToTop {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  font-size: 0.9rem;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  transition: color 0.2s ease, background 0.2s ease;
+}
+
+.footerBackToTop:hover {
+  color: var(--color-accent);
+  background: color-mix(in srgb, var(--color-accent) 10%, transparent);
+}
+
+.footerBackIcon {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+/* ============================================
+   RESPONSIVE STYLES
+   ============================================ */
+
+@media (max-width: 900px) {
+  .footerMain {
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+
+  .footerBrand {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 600px) {
+  .footerMain {
+    grid-template-columns: 1fr;
+    padding: 2rem 0;
+  }
+
+  .footerBottomContent {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

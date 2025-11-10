@@ -1,3 +1,4 @@
+import styles from './TimelineSection.module.css'
 import type { TimelineTranslation } from '../types/content'
 
 export type TimelineSectionProps = {
@@ -13,12 +14,12 @@ export function TimelineSection({ timeline }: TimelineSectionProps) {
         </span>
         <h2>{timeline.title}</h2>
       </div>
-      <div className="timeline">
+      <div className={styles.timeline}>
         {timeline.items.map((item) => (
-          <article key={item.period} className="timeline-item">
-            <div className="timeline-marker" />
-            <div className="timeline-content">
-              <span className="timeline-period">{item.period}</span>
+          <article key={item.period} className={styles.timelineItem}>
+            <div className={styles.timelineMarker} />
+            <div className={styles.timelineContent}>
+              <span className={styles.timelinePeriod}>{item.period}</span>
               <p>{item.description}</p>
             </div>
           </article>

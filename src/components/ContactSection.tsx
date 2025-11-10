@@ -1,6 +1,7 @@
 import { useState, useRef } from 'react'
 import type { ContactTranslation } from '../types/content'
 import { submitContactForm, type ContactFormData } from '../services/contactForm'
+import styles from './ContactSection.module.css'
 
 export type ContactSectionProps = {
   contact: ContactTranslation
@@ -46,23 +47,23 @@ export function ContactSection({ contact, sectionId, scheduleMailTo }: ContactSe
   }
 
   return (
-    <section id={sectionId} className="contact-section reveal">
-      <div className="contact-container">
+    <section id={sectionId} className={`${styles.contactSection} reveal`}>
+      <div className={styles.contactContainer}>
         {/* Header */}
-        <div className="contact-header">
+        <div className={styles.contactHeader}>
           <span className="eyebrow">{contact.eyebrow}</span>
-          <h2 className="contact-title">{contact.title}</h2>
-          <p className="contact-description">{contact.body}</p>
+          <h2 className={styles.contactTitle}>{contact.title}</h2>
+          <p className={styles.contactDescription}>{contact.body}</p>
         </div>
 
         {/* Main Contact Content */}
-        <div className="contact-content">
+        <div className={styles.contactContent}>
           {/* Contact Form */}
-          <div className="contact-form-wrapper">
+          <div className={styles.contactFormWrapper}>
             <h3>{contact.form.title}</h3>
-            <form ref={formRef} onSubmit={handleSubmit} className="contact-form">
-              <div className="form-group-row">
-                <div className="form-group">
+            <form ref={formRef} onSubmit={handleSubmit} className={styles.contactForm}>
+              <div className={styles.formGroupRow}>
+                <div className={styles.formGroup}>
                   <label htmlFor="contact-name">{contact.form.fields.name.label}</label>
                   <input
                     type="text"
@@ -71,11 +72,11 @@ export function ContactSection({ contact, sectionId, scheduleMailTo }: ContactSe
                     value={formData.name}
                     onChange={handleInputChange}
                     required
-                    className="form-input"
+                    className={styles.formInput}
                     placeholder={contact.form.fields.name.placeholder}
                   />
                 </div>
-                <div className="form-group">
+                <div className={styles.formGroup}>
                   <label htmlFor="contact-email">{contact.form.fields.email.label}</label>
                   <input
                     type="email"
@@ -84,13 +85,13 @@ export function ContactSection({ contact, sectionId, scheduleMailTo }: ContactSe
                     value={formData.email}
                     onChange={handleInputChange}
                     required
-                    className="form-input"
+                    className={styles.formInput}
                     placeholder={contact.form.fields.email.placeholder}
                   />
                 </div>
               </div>
               
-              <div className="form-group">
+              <div className={styles.formGroup}>
                 <label htmlFor="contact-subject">{contact.form.fields.subject.label}</label>
                 <input
                   type="text"
@@ -98,12 +99,12 @@ export function ContactSection({ contact, sectionId, scheduleMailTo }: ContactSe
                   name="subject"
                   value={formData.subject}
                   onChange={handleInputChange}
-                  className="form-input"
+                  className={styles.formInput}
                   placeholder={contact.form.fields.subject.placeholder}
                 />
               </div>
               
-              <div className="form-group">
+              <div className={styles.formGroup}>
                 <label htmlFor="contact-message">{contact.form.fields.message.label}</label>
                 <textarea
                   id="contact-message"
@@ -111,7 +112,7 @@ export function ContactSection({ contact, sectionId, scheduleMailTo }: ContactSe
                   value={formData.message}
                   onChange={handleInputChange}
                   required
-                  className="form-textarea"
+                  className={styles.formTextarea}
                   rows={6}
                   placeholder={contact.form.fields.message.placeholder}
                 />
@@ -119,20 +120,20 @@ export function ContactSection({ contact, sectionId, scheduleMailTo }: ContactSe
 
               <button 
                 type="submit" 
-                className="form-submit-btn"
+                className={styles.formSubmitBtn}
                 disabled={isSubmitting}
               >
                 {isSubmitting ? contact.form.submitting : contact.form.submitButton}
               </button>
 
               {submitStatus === 'success' && (
-                <div className="form-status success">
+                <div className={`${styles.formStatus} ${styles.success}`}>
                   {contact.form.success}
                 </div>
               )}
               
               {submitStatus === 'error' && (
-                <div className="form-status error">
+                <div className={`${styles.formStatus} ${styles.error}`}>
                   {contact.form.error}
                 </div>
               )}
@@ -140,33 +141,33 @@ export function ContactSection({ contact, sectionId, scheduleMailTo }: ContactSe
           </div>
 
           {/* Contact Info & Quick Actions */}
-          <div className="contact-info-wrapper">
+          <div className={styles.contactInfoWrapper}>
             <h3>{contact.info.title}</h3>
             
-            <div className="contact-quick-actions">
-              <a href="mailto:nath@example.com" className="contact-action-btn primary">
-                <span className="contact-action-icon">✉</span>
+            <div className={styles.contactQuickActions}>
+              <a href="mailto:nath@example.com" className={`${styles.contactActionBtn} ${styles.primary}`}>
+                <span className={styles.contactActionIcon}>✉</span>
                 <div>
-                  <div className="contact-action-title">{contact.buttons.primary}</div>
-                  <div className="contact-action-subtitle">{contact.info.emailSubtitle}</div>
+                  <div className={styles.contactActionTitle}>{contact.buttons.primary}</div>
+                  <div className={styles.contactActionSubtitle}>{contact.info.emailSubtitle}</div>
                 </div>
               </a>
               
-              <a href={scheduleMailTo} className="contact-action-btn secondary">
-                <span className="contact-action-icon">📅</span>
+              <a href={scheduleMailTo} className={`${styles.contactActionBtn} ${styles.secondary}`}>
+                <span className={styles.contactActionIcon}>📅</span>
                 <div>
-                  <div className="contact-action-title">{contact.buttons.schedule}</div>
-                  <div className="contact-action-subtitle">{contact.info.scheduleSubtitle}</div>
+                  <div className={styles.contactActionTitle}>{contact.buttons.schedule}</div>
+                  <div className={styles.contactActionSubtitle}>{contact.info.scheduleSubtitle}</div>
                 </div>
               </a>
             </div>
 
             {/* Contact Details */}
-            <div className="contact-details">
+            <div className={styles.contactDetails}>
               <h4>{contact.details.length > 0 ? 'Details' : ''}</h4>
-              <dl className="contact-details-list">
+              <dl className={styles.contactDetailsList}>
                 {contact.details.map((item) => (
-                  <div key={item.term} className="contact-detail-item">
+                  <div key={item.term} className={styles.contactDetailItem}>
                     <dt>{item.term}</dt>
                     <dd>{item.description}</dd>
                   </div>
@@ -175,11 +176,11 @@ export function ContactSection({ contact, sectionId, scheduleMailTo }: ContactSe
             </div>
 
             {/* Skills/Values Tags */}
-            <div className="contact-values">
+            <div className={styles.contactValues}>
               <h4>{contact.chips.length > 0 ? 'Values' : ''}</h4>
-              <div className="contact-values-grid">
+              <div className={styles.contactValuesGrid}>
                 {contact.chips.map((chip) => (
-                  <span key={chip} className="contact-value-tag">
+                  <span key={chip} className={styles.contactValueTag}>
                     {chip}
                   </span>
                 ))}
