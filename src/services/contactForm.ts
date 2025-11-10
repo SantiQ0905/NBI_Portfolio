@@ -1,5 +1,5 @@
-// Simple form submission service
-// This can be extended to use services like EmailJS, Formspree, or Netlify Forms
+// src/services/contactForm.ts
+import emailjs from '@emailjs/browser'
 
 export interface ContactFormData {
   name: string
@@ -13,141 +13,78 @@ export interface FormSubmissionResult {
   message: string
 }
 
-// For now, using mailto as a fallback, but this can be easily extended
+/**
+ * Primary handler: EmailJS via Gmail.
+ * Falls back to mailto if EmailJS fails (optional, can remove if undesired).
+ */
 export async function submitContactForm(data: ContactFormData): Promise<FormSubmissionResult> {
   try {
-    // Option 1: EmailJS (requires setup)
-    // return await submitWithEmailJS(data)
-    
-    // Option 2: Formspree (requires setup)
-    // return await submitWithFormspree(data)
-    
-    // Option 3: Custom API endpoint
-    // return await submitWithAPI(data)
-    
-    // Option 4: Mailto fallback (current implementation)
-    return await submitWithMailto(data)
-    
-  } catch (error) {
-    console.error('Form submission error:', error)
-    return {
-      success: false,
-      message: 'Failed to send message. Please try again.'
+    validateData(data)
+    const result = await submitWithEmailJS(data)
+    return result
+  } catch (err) {
+    console.error('EmailJS send failed, trying mailto fallback...', err)
+    try {
+      // Optional fallback — comment out if you prefer to surface the error instead
+      return await submitWithMailto(data)
+    } catch (fallbackErr) {
+      console.error('Mailto fallback failed:', fallbackErr)
+      return {
+        success: false,
+        message: 'Failed to send message. Please try again.',
+      }
     }
   }
 }
 
-// Mailto fallback implementation
+/** Basic client-side validation */
+function validateData(d: ContactFormData) {
+  if (!d.name?.trim()) throw new Error('Name is required')
+  if (!d.email?.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(d.email)) throw new Error('Valid email is required')
+  if (!d.subject?.trim()) throw new Error('Subject is required')
+  if (!d.message?.trim()) throw new Error('Message is required')
+}
+
+// --- EmailJS implementation ---
+async function submitWithEmailJS(data: ContactFormData): Promise<FormSubmissionResult> {
+  const serviceId  = import.meta.env.VITE_EMAILJS_SERVICE_ID
+  const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID
+  const publicKey  = import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+
+  if (!serviceId || !templateId || !publicKey) {
+    throw new Error('EmailJS environment variables are not configured')
+  }
+
+  const templateParams = {
+    from_name:  data.name,
+    from_email: data.email,
+    subject:    data.subject,
+    message:    data.message,
+    reply_to:   data.email,
+  }
+
+  const res = await emailjs.send(serviceId, templateId, templateParams, { publicKey })
+  if ((res?.status ?? 0) === 200) {
+    return { success: true, message: 'Message sent successfully!' }
+  }
+  throw new Error('EmailJS send returned a non-200 status')
+}
+
+// --- Mailto fallback (optional) ---
 async function submitWithMailto(data: ContactFormData): Promise<FormSubmissionResult> {
-  const mailtoLink = `mailto:nath@example.com?subject=${encodeURIComponent(
+  const toEmail = import.meta.env.VITE_CONTACT_TO_EMAIL || 'example@example.com'
+
+  const mailtoLink = `mailto:${encodeURIComponent(toEmail)}?subject=${encodeURIComponent(
     data.subject || 'Contact from portfolio'
   )}&body=${encodeURIComponent(
     `Name: ${data.name}\nEmail: ${data.email}\n\nMessage:\n${data.message}`
   )}`
-  
-  // Open mailto link
+
+  // Open user's email client
   window.location.href = mailtoLink
-  
+
   return {
     success: true,
-    message: 'Email client opened successfully'
+    message: 'Email client opened successfully',
   }
 }
-
-// EmailJS implementation (commented out - requires setup)
-/*
-async function submitWithEmailJS(data: ContactFormData): Promise<FormSubmissionResult> {
-  // Requires: npm install emailjs-com
-  // import emailjs from 'emailjs-com'
-  
-  try {
-    const result = await emailjs.send(
-      'YOUR_SERVICE_ID',
-      'YOUR_TEMPLATE_ID',
-      {
-        from_name: data.name,
-        from_email: data.email,
-        subject: data.subject,
-        message: data.message,
-        to_email: 'nath@example.com'
-      },
-      'YOUR_USER_ID'
-    )
-    
-    return {
-      success: true,
-      message: 'Message sent successfully!'
-    }
-  } catch (error) {
-    return {
-      success: false,
-      message: 'Failed to send message. Please try again.'
-    }
-  }
-}
-*/
-
-// Formspree implementation (commented out - requires setup)
-/*
-async function submitWithFormspree(data: ContactFormData): Promise<FormSubmissionResult> {
-  try {
-    const response = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        name: data.name,
-        email: data.email,
-        subject: data.subject,
-        message: data.message
-      })
-    })
-    
-    if (response.ok) {
-      return {
-        success: true,
-        message: 'Message sent successfully!'
-      }
-    } else {
-      throw new Error('Form submission failed')
-    }
-  } catch (error) {
-    return {
-      success: false,
-      message: 'Failed to send message. Please try again.'
-    }
-  }
-}
-*/
-
-// Custom API implementation (commented out - requires backend)
-/*
-async function submitWithAPI(data: ContactFormData): Promise<FormSubmissionResult> {
-  try {
-    const response = await fetch('/api/contact', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data)
-    })
-    
-    const result = await response.json()
-    
-    if (response.ok) {
-      return {
-        success: true,
-        message: result.message || 'Message sent successfully!'
-      }
-    } else {
-      throw new Error(result.message || 'Form submission failed')
-    }
-  } catch (error) {
-    return {
-      success: false,
-      message: 'Failed to send message. Please try again.'
-    }
-  }
-}
-*/
