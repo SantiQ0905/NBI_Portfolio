@@ -62,3 +62,43 @@
 .projectLink:hover {
   text-decoration: underline;
 }
+
+/* Mobile responsive font sizes */
+@media (max-width: 768px) {
+  .projectCard h3 {
+    font-size: 1.5rem;
+  }
+
+  .projectCard p {
+    font-size: 0.95rem;
+  }
+
+  .badge {
+    font-size: 0.65rem;
+    padding: 0.3rem 0.75rem;
+  }
+
+  .projectCard {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .projectCard h3 {
+    font-size: 1.25rem;
+  }
+
+  .projectCard p {
+    font-size: 0.85rem;
+    line-height: 1.6;
+  }
+
+  .badge {
+    font-size: 0.6rem;
+    padding: 0.25rem 0.65rem;
+  }
+
+  .projectCard {
+    padding: 1.25rem;
+  }
+}

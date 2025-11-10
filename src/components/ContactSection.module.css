@@ -342,6 +342,57 @@
   }
 }
 
+@media (max-width: 768px) {
+  .contactTitle {
+    font-size: clamp(2.5rem, 7vw, 3.5rem);
+  }
+
+  .contactDescription {
+    font-size: 1rem;
+  }
+
+  .contactFormWrapper h3,
+  .contactInfoWrapper h3 {
+    font-size: 1.5rem;
+  }
+
+  .contactInfoWrapper h4 {
+    font-size: 1.1rem;
+  }
+
+  .formGroup label {
+    font-size: 0.95rem;
+  }
+
+  .formInput,
+  .formTextarea {
+    font-size: 0.95rem;
+    padding: 0.9rem 1.1rem;
+  }
+
+  .formSubmitBtn {
+    font-size: 0.95rem;
+    padding: 1.1rem 1.8rem;
+  }
+
+  .contactActionTitle {
+    font-size: 0.95rem;
+  }
+
+  .contactActionSubtitle {
+    font-size: 0.8rem;
+  }
+
+  .contactDetailItem dt,
+  .contactDetailItem dd {
+    font-size: 0.9rem;
+  }
+
+  .contactValueTag {
+    font-size: 0.8rem;
+  }
+}
+
 @media (max-width: 600px) {
   .contactSection {
     padding: 3rem 1rem;
@@ -352,7 +403,11 @@
   }
 
   .contactTitle {
-    font-size: clamp(3rem, 10vw, 4rem);
+    font-size: clamp(2rem, 8vw, 2.5rem);
+  }
+
+  .contactDescription {
+    font-size: 0.875rem;
   }
 
   .contactFormWrapper {
@@ -362,6 +417,53 @@
 
   .contactFormWrapper h3,
   .contactInfoWrapper h3 {
-    font-size: 2rem;
+    font-size: 1.25rem;
+  }
+
+  .contactInfoWrapper h4 {
+    font-size: 1rem;
+  }
+
+  .formGroup label {
+    font-size: 0.875rem;
+  }
+
+  .formInput,
+  .formTextarea {
+    font-size: 0.875rem;
+    padding: 0.85rem 1rem;
+  }
+
+  .formSubmitBtn {
+    font-size: 0.875rem;
+    padding: 1rem 1.5rem;
+  }
+
+  .contactActionBtn {
+    padding: 1.25rem;
+  }
+
+  .contactActionIcon {
+    font-size: 1.25rem;
+    width: 2.25rem;
+    height: 2.25rem;
+  }
+
+  .contactActionTitle {
+    font-size: 0.875rem;
+  }
+
+  .contactActionSubtitle {
+    font-size: 0.75rem;
+  }
+
+  .contactDetailItem dt,
+  .contactDetailItem dd {
+    font-size: 0.8rem;
+  }
+
+  .contactValueTag {
+    font-size: 0.7rem;
+    padding: 0.4rem 0.85rem;
   }
 }

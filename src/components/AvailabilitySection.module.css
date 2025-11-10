@@ -33,3 +33,35 @@
 .availabilityLink:hover {
   text-decoration: underline;
 }
+
+/* Mobile responsive font sizes */
+@media (max-width: 768px) {
+  .availability ul {
+    font-size: 0.95rem;
+    padding-left: 1.5rem;
+    gap: 1rem;
+  }
+
+  .availabilityLink {
+    font-size: 0.95rem;
+  }
+
+  .availability {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .availability ul {
+    font-size: 0.85rem;
+    line-height: 1.6;
+  }
+
+  .availabilityLink {
+    font-size: 0.85rem;
+  }
+
+  .availability {
+    padding: 1.25rem;
+  }
+}

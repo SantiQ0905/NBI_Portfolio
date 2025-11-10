@@ -291,12 +291,91 @@
   .footerBrand {
     grid-column: 1 / -1;
   }
+
+  .footerBrandName {
+    font-size: 1.25rem;
+  }
+
+  .footerBrandTagline {
+    font-size: 0.8rem;
+  }
+
+  .footerDescription {
+    font-size: 0.9rem;
+  }
+
+  .footerLinks h4,
+  .footerSocial h4,
+  .footerSettings h4 {
+    font-size: 1rem;
+  }
+
+  .footerLink,
+  .footerSocialLink {
+    font-size: 0.9rem;
+  }
 }
 
 @media (max-width: 600px) {
   .footerMain {
     grid-template-columns: 1fr;
     padding: 2rem 0;
+  }
+
+  .footerBrandName {
+    font-size: 1.125rem;
+  }
+
+  .footerBrandTagline {
+    font-size: 0.75rem;
+  }
+
+  .footerDescription {
+    font-size: 0.85rem;
+  }
+
+  .footerLinks h4,
+  .footerSocial h4,
+  .footerSettings h4 {
+    font-size: 0.95rem;
+  }
+
+  .footerLink {
+    font-size: 0.85rem;
+  }
+
+  .footerSocialLink {
+    font-size: 0.85rem;
+  }
+
+  .footerSocialText {
+    font-size: 0.8rem;
+  }
+
+  .footerControlLabel {
+    font-size: 0.85rem;
+  }
+
+  .footerThemeToggle,
+  .footerLanguageOption {
+    font-size: 0.85rem;
+  }
+
+  .footerLanguageCode,
+  .footerLanguageName {
+    font-size: 0.8rem;
+  }
+
+  .footerCopyright p {
+    font-size: 0.8rem;
+  }
+
+  .footerBuiltWith {
+    font-size: 0.7rem !important;
+  }
+
+  .footerBackToTop {
+    font-size: 0.8rem;
   }
 
   .footerBottomContent {
