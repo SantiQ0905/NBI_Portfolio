@@ -20,7 +20,7 @@ export function HeroSection({ hero, portraitSrc = DEFAULT_PORTRAIT }: HeroSectio
           {hero.description.body}
         </p>
         <div className={styles.heroActions}>
-          <a href="/nath-cv.pdf" className="button button-primary" target="_blank" rel="noreferrer">
+          <a href="/Media/Documents/nath-cv.pdf" className="button button-primary" target="_blank" rel="noreferrer">
             {hero.ctas.cv}
           </a>
           <a
