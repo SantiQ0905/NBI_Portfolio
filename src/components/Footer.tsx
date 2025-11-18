@@ -1,6 +1,7 @@
 import type { Locale, FooterTranslation } from '../types/content'
 import { sectionIds } from '../constants/sections'
 import styles from './Footer.module.css'
+import { Linkedin, Instagram, Twitter, Mail, GraduationCap } from 'lucide-react'
 
 export type FooterProps = {
   footer: FooterTranslation
@@ -18,17 +19,27 @@ export function Footer({ footer, locale, theme, languageNames, onToggleTheme, on
     {
       name: footer.social.linkedin,
       url: 'https://linkedin.com/in/nath-example',
-      icon: '💼'
+      icon: Linkedin
+    },
+    {
+      name: footer.social.instagram,
+      url: 'https://instagram.com/nath-example',
+      icon: Instagram
+    },
+    {
+      name: footer.social.twitter,
+      url: 'https://x.com/nath-example',
+      icon: Twitter
     },
     {
       name: footer.social.researchGate,
       url: 'https://researchgate.net/profile/nath-example',
-      icon: '🔬'
+      icon: GraduationCap
     },
     {
       name: footer.social.email,
       url: 'mailto:nath@example.com',
-      icon: '✉️'
+      icon: Mail
     }
   ]
 
@@ -70,19 +81,24 @@ export function Footer({ footer, locale, theme, languageNames, onToggleTheme, on
           <div className={styles.footerSocial}>
             <h4>{footer.social.title}</h4>
             <div className={styles.footerSocialLinks}>
-              {socialLinks.map((link) => (
-                <a
-                  key={link.name}
-                  href={link.url}
-                  className={styles.footerSocialLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={`Visit my ${link.name}`}
-                >
-                  <span className={styles.footerSocialIcon}>{link.icon}</span>
-                  <span className={styles.footerSocialText}>{link.name}</span>
-                </a>
-              ))}
+              {socialLinks.map((link) => {
+                const IconComponent = link.icon
+                return (
+                  <a
+                    key={link.name}
+                    href={link.url}
+                    className={styles.footerSocialLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`Visit my ${link.name}`}
+                  >
+                    <span className={styles.footerSocialIcon}>
+                      <IconComponent size={20} strokeWidth={2} />
+                    </span>
+                    <span className={styles.footerSocialText}>{link.name}</span>
+                  </a>
+                )
+              })}
             </div>
           </div>
 

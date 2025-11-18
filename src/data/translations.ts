@@ -196,6 +196,8 @@ export const translations: Record<Locale, Translation> = {
       social: {
         title: 'Conectar',
         linkedin: 'LinkedIn',
+        instagram: 'Instagram',
+        twitter: 'X (Twitter)',
         researchGate: 'ResearchGate',
         email: 'Correo'
       },
@@ -399,6 +401,8 @@ export const translations: Record<Locale, Translation> = {
       social: {
         title: 'Connect',
         linkedin: 'LinkedIn',
+        instagram: 'Instagram',
+        twitter: 'X (Twitter)',
         researchGate: 'ResearchGate',
         email: 'Email'
       },
@@ -602,6 +606,8 @@ export const translations: Record<Locale, Translation> = {
       social: {
         title: 'Verbinden',
         linkedin: 'LinkedIn',
+        instagram: 'Instagram',
+        twitter: 'X (Twitter)',
         researchGate: 'ResearchGate',
         email: 'E-Mail'
       },

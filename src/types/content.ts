@@ -154,6 +154,8 @@ export type FooterTranslation = {
   social: {
     title: string
     linkedin: string
+    instagram: string
+    twitter: string
     researchGate: string
     email: string
   }
