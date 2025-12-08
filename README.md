@@ -45,7 +45,6 @@ A modern, responsive portfolio website for a medical student showcasing professi
 - **Contact**: Interactive contact form with multiple communication options
 
 ### 🎯 Special Features
-- **Secret route**: Hidden page at `/sqm/letter` with password protection and themed styling
 - **Intersection Observer**: Smooth reveal animations on scroll with stagger effects
 - **Local storage**: Remembers theme and language preferences across sessions
 - **SEO optimized**: Proper meta tags and semantic HTML structure
@@ -122,9 +121,7 @@ src/
 │   ├── ContactSection.tsx  # Contact form
 │   ├── ContactSection.module.css
 │   ├── Footer.tsx          # Site footer
-│   ├── Footer.module.css
-│   └── SecretLetterPage.tsx # Hidden page
-│       └── SecretLetterPage.module.css
+│   └── Footer.module.css
 ├── data/
 │   └── translations.ts     # Multi-language content (ES/EN/DE)
 ├── types/
